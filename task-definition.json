@@ -1,0 +1,19 @@
+{
+    "family": "netcoreapps-northwind-task",
+    "networkMode": "host",
+    "containerDefinitions": [
+        {
+            "image": "831181395254.dkr.ecr.ap-southeast-2.amazonaws.com/netcore-northwind:latest",
+            "name": "netcoreapps-northwind-container",
+            "cpu": 10,
+            "memory": 256,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 5001,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ]
+}

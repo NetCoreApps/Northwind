@@ -1,0 +1,33 @@
+sudo: required
+language: csharp
+solution: src/Northwind.sln
+services:
+  - docker
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      dotnet: 1.0.0-preview2-003121
+      mono: none
+      env: DOTNETCORE=1
+script:
+  - sudo apt-get install jq #install jq for json parsing
+  - pip install --user awscli # install aws cli w/o sudo
+  - export PATH=$PATH:$HOME/.local/bin # put aws in the path
+  - IMAGE_REPO=netcore-northwind:latest
+  - ECS_SERVICE=netcoreapps-northwind-service
+  - ECS_TASK=netcoreapps-northwind-task
+  - eval $(aws ecr get-login --region ap-southeast-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+  - docker build -t netcore-northwind .
+  - docker tag netcore-northwind $AWS_ECS_REPO_DOMAIN/$IMAGE_REPO
+  - docker push $AWS_ECS_REPO_DOMAIN/$IMAGE_REPO
+  - aws ecs register-task-definition --cli-input-json file://task-definition.json --region ap-southeast-2 > /dev/null # Create a new task revision
+  - SERVICE_EXISTS=$(aws ecs list-services --region ap-southeast-2 | jq '.serviceArns["arn:aws:ecs:ap-southeast-2:831181395254:service/$ECS_SERVICE"]')
+  - if [ -z "$SERVICE_EXISTS"]; then echo "Service exists"; else aws ecs --cluster default --service-name $ECS_SERVICE --task-definition $ECS_TASK --desired-count 1;
+  - TASK_REVISION=$(aws ecs describe-task-definition --task-definition $ECS_TASK --region ap-southeast-2 | jq '.taskDefinition.revision') #get latest revision
+  - aws ecs update-service --cluster default --service $ECS_SERVICE --task-definition "$ECS_TASK:$TASK_REVISION" --region ap-southeast-2 > /dev/null #update service with latest task revision
+  - TEMP_ARN=$(aws ecs list-tasks --region ap-southeast-2 --service-name $ECS_SERVICE | jq '.taskArns[0]') # Get current running task ARN
+  - TASK_ARN="${TEMP_ARN%\"}" # strip double quotes
+  - TASK_ARN="${TASK_ARN#\"}" # strip double quotes
+  - aws ecs stop-task --task $TASK_ARN --region ap-southeast-2 > /dev/null # Stop current task to force start of new task revision with new image
