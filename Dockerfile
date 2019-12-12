@@ -4,6 +4,8 @@ WORKDIR /app
 # copy csproj and restore as distinct layers
 COPY src/*.sln .
 COPY src/Northwind/*.csproj ./Northwind/
+COPY src/Northwind.ServiceInterface/*.csproj ./Northwind.ServiceInterface/
+COPY src/Northwind.ServiceModel/*.csproj ./Northwind.ServiceModel/
 RUN dotnet restore
 
 # copy everything else and build app
