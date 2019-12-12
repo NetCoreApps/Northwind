@@ -10,6 +10,8 @@ RUN dotnet restore
 
 # copy everything else and build app
 COPY src/Northwind/. ./Northwind/
+COPY src/Northwind.ServiceInterface/. ./Northwind.ServiceInterface/
+COPY src/Northwind.ServiceModel/. ./Northwind.ServiceModel/
 WORKDIR /app/Northwind
 RUN dotnet publish -c Release -o out
 
