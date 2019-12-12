@@ -1,13 +1,18 @@
-FROM microsoft/dotnet:2.2-sdk AS build-env
-COPY src /app
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /app
 
-RUN dotnet restore --configfile ./NuGet.Config
+# copy csproj and restore as distinct layers
+COPY src/*.sln .
+COPY src/Northwind/*.csproj ./Northwind/
+RUN dotnet restore
+
+# copy everything else and build app
+COPY src/Northwind/. ./Northwind/
+WORKDIR /app/Northwind
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
-FROM microsoft/dotnet:2.2-aspnetcore-runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
-COPY --from=build-env /app/Northwind/out .
+COPY --from=build /app/Northwind/out ./
 ENV ASPNETCORE_URLS http://*:5000
 ENTRYPOINT ["dotnet", "Northwind.dll"]
