@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run dotnet publish
-        run: dotnet publish ./src/Northwind/ -o publish -c release
+        run: dotnet publish ./src/Northwind/ -o publish -r linux-x64 -c release
 
       - name: repository name fix
         run: echo "image_repository_name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
