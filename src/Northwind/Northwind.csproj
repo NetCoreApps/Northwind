@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\**\*" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="App_Data\**\*" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
