@@ -6,7 +6,7 @@ using Northwind.ServiceModel.Types;
 namespace Northwind.ServiceModel
 {
     [Route("/customers/{Id}"), Tag(Tags.Customers)]
-    public class GetCustomerDetails : IReturn<CustomerDetailsResponse>
+    public class GetCustomerDetails : IGet, IReturn<CustomerDetailsResponse>
     {
         public string Id { get; set; }
     }
