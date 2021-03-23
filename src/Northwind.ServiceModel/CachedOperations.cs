@@ -3,30 +3,24 @@ using System.Runtime.Serialization;
 
 namespace Northwind.ServiceModel
 {
-    [DataContract]
-    [Route("/cached/customers")]
-    public class CachedCustomers
-    {
-    }
+    [Route("/cached/customers"), Tag(Tags.Cached)]
+    public class CachedGetAllCustomers : IReturn<CustomersResponse> {}
 
     [DataContract]
-    [Route("/cached/customers/{Id}")]
-    public class CachedCustomerDetails
+    [Route("/cached/customers/{Id}"), Tag(Tags.Cached)]
+    public class CachedGetCustomerDetails : IReturn<CustomerDetailsResponse>
     {
         [DataMember]
         public string Id { get; set; }
     }
 
-    [DataContract]
+    [Tag(Tags.Cached)]
     [Route("/cached/orders")]
     [Route("/cached/orders/page/{Page}")]
     [Route("/cached/customers/{CustomerId}/orders")]
-    public class CachedOrders
+    public class CachedGetOrders : IReturn<OrdersResponse>
     {
-        [DataMember]
         public int? Page { get; set; }
-
-        [DataMember]
         public string CustomerId { get; set; }
     }
 }

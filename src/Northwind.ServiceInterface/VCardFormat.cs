@@ -39,7 +39,7 @@ namespace Northwind.ServiceInterface
                 var customers = response as CustomersResponse;
                 if (customers != null)
                 {
-                    customers.Customers.ForEach(x => WriteCustomer(sw, x));
+                    customers.Results.ForEach(x => WriteCustomer(sw, x));
                 }
             }
         }

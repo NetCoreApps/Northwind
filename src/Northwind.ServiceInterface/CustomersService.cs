@@ -7,7 +7,7 @@ namespace Northwind.ServiceInterface
 {
     public class CustomersService : Service
     {
-        public object Get(Customers request) => 
-            new CustomersResponse { Customers = Db.Select<Customer>() };
+        public object Get(GetAllCustomers request) => 
+            new CustomersResponse { Results = Db.Select<Customer>() };
     }
 }

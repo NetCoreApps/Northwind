@@ -5,29 +5,19 @@ using Northwind.ServiceModel.Types;
 
 namespace Northwind.ServiceModel
 {
-    [DataContract]
-    [Route("/customers/{Id}")]
-    public class CustomerDetails : IReturn<CustomerDetailsResponse>
+    [Route("/customers/{Id}"), Tag(Tags.Customers)]
+    public class GetCustomerDetails : IReturn<CustomerDetailsResponse>
     {
-        [DataMember]
         public string Id { get; set; }
     }
 
     [DataContract]
     public class CustomerDetailsResponse : IHasResponseStatus
     {
-        public CustomerDetailsResponse()
-        {
-            this.ResponseStatus = new ResponseStatus();
-            this.CustomerOrders = new List<CustomerOrder>();
-        }
-
         [DataMember]
         public Customer Customer { get; set; }
-
         [DataMember]
-        public List<CustomerOrder> CustomerOrders { get; set; }
-
+        public List<CustomerOrder> Orders { get; set; }
         [DataMember]
         public ResponseStatus ResponseStatus { get; set; }
     }

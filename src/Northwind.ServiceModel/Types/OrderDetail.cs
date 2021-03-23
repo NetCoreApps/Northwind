@@ -5,10 +5,7 @@ namespace Northwind.ServiceModel.Types
 	[DataContract]
 	public class OrderDetail
 	{
-		public string Id
-		{
-			get { return this.OrderId + "/" + this.ProductId; }
-		}
+		public string Id => this.OrderId + "/" + this.ProductId;
 
 		[DataMember]
 		public int OrderId { get; set; }
