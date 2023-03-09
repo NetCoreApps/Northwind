@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Northwind;
+using ServiceStack;
 
-namespace Northwind
+ServiceStack.Licensing.RegisterLicense("OSS BSD-3-Clause 2023 https://github.com/NetCoreApps/NorthwindAuto C623PT+qbRoeQ8S1/gJ2WpGY+8O/Rh97xyFx3RmIorDOGrKaW7fTbn9IBNlFkTbGzj1x/U6Pq/sPzIboSZazlJCSg9s+HNUop0SnhvN91Zm/STnw+G9E8JF79IOaxM1a0DCKAUrYnysyLAB3vcPJTDe+L60tlHhj9edz3kdEo3w=");
+
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
-    }
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+    app.UseHttpsRedirection();
 }
+
+app.UseServiceStack(new AppHost());
+
+app.Run();

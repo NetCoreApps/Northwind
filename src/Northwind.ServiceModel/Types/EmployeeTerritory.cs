@@ -1,19 +1,15 @@
-namespace Northwind.ServiceModel.Types
+using System.Runtime.Serialization;
+
+namespace Northwind.ServiceModel.Types;
+
+[DataContract]
+public class EmployeeTerritory
 {
-	using System.Runtime.Serialization;
+	public string Id => EmployeeId + "/" + TerritoryId;
 
-	[DataContract]
-	public class EmployeeTerritory
-	{
-		public string Id
-		{
-			get { return this.EmployeeId + "/" + this.TerritoryId; }
-		}
+	[DataMember]
+	public int EmployeeId { get; set; }
 
-		[DataMember]
-		public int EmployeeId { get; set; }
-
-		[DataMember]
-		public string TerritoryId { get; set; }
-	}
+	[DataMember]
+	public string TerritoryId { get; set; }
 }

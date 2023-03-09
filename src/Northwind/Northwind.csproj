@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>Northwind</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>Northwind</PackageId>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="6.*" />
+    <PackageReference Include="ServiceStack.Server" Version="6.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="6.*" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="wwwroot\**\*;App_Data\**\*">
@@ -20,16 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Text" Version="5.*" />
-    <PackageReference Include="ServiceStack.Interfaces" Version="5.*" />
-    <PackageReference Include="ServiceStack.Client" Version="5.*" />
-    <PackageReference Include="ServiceStack.Common" Version="5.*" />
-    <PackageReference Include="ServiceStack" Version="5.*" />
-    <PackageReference Include="ServiceStack.Redis" Version="5.*" />
-    <PackageReference Include="ServiceStack.OrmLite" Version="5.*" />
-    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="5.*" />
-    <PackageReference Include="ServiceStack.Server" Version="5.*" />
-    <PackageReference Include="ServiceStack.Admin" Version="5.*" />
+    <None Update="northwind.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,25 +1,24 @@
-namespace Northwind.ServiceModel.Types
+using System.Runtime.Serialization;
+
+namespace Northwind.ServiceModel.Types;
+
+[DataContract]
+public class OrderDetail
 {
-	using System.Runtime.Serialization;
+	public string Id => OrderId + "/" + ProductId;
 
-	[DataContract]
-	public class OrderDetail
-	{
-		public string Id => this.OrderId + "/" + this.ProductId;
+	[DataMember]
+	public int OrderId { get; set; }
 
-		[DataMember]
-		public int OrderId { get; set; }
+	[DataMember]
+	public int ProductId { get; set; }
 
-		[DataMember]
-		public int ProductId { get; set; }
+	[DataMember]
+	public decimal UnitPrice { get; set; }
 
-		[DataMember]
-		public decimal UnitPrice { get; set; }
+	[DataMember]
+	public short Quantity { get; set; }
 
-		[DataMember]
-		public short Quantity { get; set; }
-
-		[DataMember]
-		public double Discount { get; set; }
-	}
+	[DataMember]
+	public double Discount { get; set; }
 }

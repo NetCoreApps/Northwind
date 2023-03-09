@@ -1,14 +1,13 @@
-namespace Northwind.ServiceModel.Types
+using System.Runtime.Serialization;
+
+namespace Northwind.ServiceModel.Types;
+
+[DataContract]
+public class Region
 {
-	using System.Runtime.Serialization;
+	[DataMember]
+	public int Id { get; set; }
 
-	[DataContract]
-	public class Region
-	{
-		[DataMember]
-		public int Id { get; set; }
-
-		[DataMember]
-		public string RegionDescription { get; set; }
-	}
+	[DataMember]
+	public string RegionDescription { get; set; }
 }

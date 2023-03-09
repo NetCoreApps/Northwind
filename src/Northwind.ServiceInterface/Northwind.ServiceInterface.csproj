@@ -1,12 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Northwind.ServiceInterface</AssemblyName>
-    <PackageId>Northwind.ServiceInterface</PackageId>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,13 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Server" Version="5.*" />
-    <PackageReference Include="ServiceStack" Version="5.*" />
-    <PackageReference Include="ServiceStack.Interfaces" Version="5.*" />
-    <PackageReference Include="ServiceStack.Text" Version="5.*" />
-    <PackageReference Include="ServiceStack.Client" Version="5.*" />
-    <PackageReference Include="ServiceStack.Common" Version="5.*" />
-    <PackageReference Include="ServiceStack.OrmLite" Version="5.*" />
+    <PackageReference Include="ServiceStack.Server" Version="6.*" />
   </ItemGroup>
 
 </Project>
