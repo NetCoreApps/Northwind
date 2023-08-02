@@ -18,7 +18,7 @@ services:
     network_mode: bridge
 
   letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:2.0
     container_name: nginx-proxy-le
     restart: always
     environment:
@@ -38,8 +38,3 @@ volumes:
   dhparam:
   certs:
   acme:
-
-networks:
-  default:
-    external:
-      name: webproxy

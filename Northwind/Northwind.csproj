@@ -16,6 +16,7 @@
     <None Update="wwwroot\**\*;App_Data\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
+    <None Remove="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
