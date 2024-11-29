@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+    <ItemGroup>
+        <ContainerLabel Include="service" Value="northwind" />
+    </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="ServiceStack" Version="6.*" />
     <PackageReference Include="ServiceStack.Server" Version="6.*" />
